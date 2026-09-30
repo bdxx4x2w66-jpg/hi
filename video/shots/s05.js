@@ -18,9 +18,9 @@ function s05World(ctx, t, camX) {
   line(ctx, [[1780, ARROW_Y], [FORK.x, FORK.y]], { w: 5, col: C.red, alpha: 1 - tw(t, 0.8, 2.4) });
   line(ctx, [[1780, ARROW_Y], [FORK.x, FORK.y]], { w: 3, col: C.paper, alpha: 0.6 * tw(t, 0.8, 2.4) });
   // background ridges, drawn around the camera with parallax
-  const par = camX * 0.6;
-  line(ctx, ridge(camX - 1800, camX + 1800, 520, 120, 7, 16, 0.0016).map(p => [p[0], p[1]]), { w: 2, col: C.paper, alpha: 0.12 });
-  line(ctx, ridge(camX - 1800 - par, camX + 1800 - par, 600, 90, 13, 16, 0.002).map(p => [p[0] + par, p[1]]), { w: 2, col: C.paper, alpha: 0.2 });
+  const par = camX * 0.6, rIn = tw(t, 0.4, 2.2);
+  line(ctx, ridge(camX - 1800, camX + 1800, 520, 120, 7, 16, 0.0016).map(p => [p[0], p[1]]), { w: 2, col: C.paper, alpha: 0.12 * rIn });
+  line(ctx, ridge(camX - 1800 - par, camX + 1800 - par, 600, 90, 13, 16, 0.002).map(p => [p[0] + par, p[1]]), { w: 2, col: C.paper, alpha: 0.2 * rIn });
   // goal branch (up) and wrong branch (right)
   const gIn = tw(t, 0.9, 2.0, E.outCubic);
   line(ctx, partial([[FORK.x, FORK.y], [FORK.x + 140, FORK.y - 160], [GOAL.x, GOAL.y + 40]], gIn), { w: 3, col: C.paper, alpha: 0.6 });

@@ -50,7 +50,7 @@ function indexUI(ctx, st) {
       });
     } else ctx.fillText(String(Math.round(st.score)), 0, 0);
     ctx.restore();
-    label(ctx, '/ 100', x, y + 150, { t, t0: 0, size: 30, col: C.paper2, align: 'center', alpha: st.scoreAlpha * 0.8 });
+    label(ctx, '/ 100', x, y + 150, { t: 99, t0: 0, size: 30, col: C.paper2, align: 'center', alpha: st.scoreAlpha * 0.8 });
   }
 
   // parameter bars
@@ -107,7 +107,7 @@ SHOTS.s01 = (ctx, t) => {
   if (t < 3) cam = camLerp(CAM_WIDE, { x: 950, y: 500, z: 1.12 }, tw(t, 0, 3, E.inOutSine));
   else if (t < 5.4) cam = camLerp({ x: 950, y: 500, z: 1.12 }, uiCam(960, 560, 1.0), tw(t, 3, 5.4, E.inOutQuart));
   else if (t < 11.2) cam = camLerp(uiCam(960, 560, 1.0), uiCam(820, 560, 1.1), tw(t, 5.4, 11.2, E.inOutSine));
-  else cam = camLerp(uiCam(820, 560, 1.1), S01_END, tw(t, 11.2, 12.5, E.inCubic));
+  else cam = camLerp(uiCam(820, 560, 1.1), S01_END, tw(t, 11.2, 12.5, E.inOutCubic));
 
   const st = s01State(t);
   withCam(ctx, cam, () => {

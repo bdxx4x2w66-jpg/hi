@@ -56,9 +56,9 @@ SHOTS.s08 = (ctx, t) => {
     });
 
     // the line the whole film turns on
-    text(ctx, '你能算他们受了多少苦，', 140, 420, { size: 96, align: 'left', t, t0: 14.8, stagger: 0.07, out: 19.3 });
-    text(ctx, '却算不出，他们为什么这样做。', 140, 560, { size: 96, align: 'left', t, t0: 16.4, stagger: 0.07, out: 19.4 });
-    en(ctx, 'You can calculate how much they suffered — but not why they did it.', 144, 670, { t, t0: 17.0, size: 32, out: 19.4 });
+    text(ctx, '你能算他们受了多少苦，', 140, 420, { size: 96, align: 'left', t, t0: 14.8, stagger: 0.07, out: 18.7 });
+    text(ctx, '却算不出，他们为什么这样做。', 140, 560, { size: 96, align: 'left', t, t0: 16.4, stagger: 0.07, out: 18.8 });
+    en(ctx, 'You can calculate how much they suffered — but not why they did it.', 144, 670, { t, t0: 17.0, size: 32, out: 18.8 });
   });
   vignette(ctx, 0.5);
 };
