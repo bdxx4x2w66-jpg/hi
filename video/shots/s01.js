@@ -4,6 +4,7 @@
 const uiCam = (ux, uy, zUI) => ({ x: SCREEN.x + ux * 0.4, y: SCREEN.y + uy * 0.4, z: zUI * 2.5 });
 
 const PARAMS = ['饥饿', '疲劳', '距离', '危险', '坚持'];
+const PARAMS_EN = ['HUNGER', 'FATIGUE', 'DISTANCE', 'DANGER', 'PERSISTENCE'];
 const RING = { x: 700, y: 560, r: 300 };
 const BARS = { x: 1290, x1: 1720, y0: 380, dy: 88 };
 
@@ -37,9 +38,17 @@ function indexUI(ctx, st) {
   if (st.scoreAlpha > 0) {
     const k = 1 + 0.12 * (st.pop ?? 0);
     ctx.save(); ctx.globalAlpha *= st.scoreAlpha; ctx.translate(x, y + 10); ctx.scale(k, k);
-    ctx.font = `700 ${st.score >= 100 ? 210 : 240}px ${MONO}`; ctx.fillStyle = st.score >= 100 ? C.paper : C.paper;
+    ctx.font = `700 ${st.score >= 100 ? 210 : 240}px ${MONO}`; ctx.fillStyle = C.paper;
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText(String(Math.round(st.score)), 0, 0);
+    if (st.score >= 100) {
+      // draw the three digits separately so the "1" can tip over (shots 2 → 3)
+      const adv = ctx.measureText('0').width;
+      ['1', '0', '0'].forEach((d, i) => {
+        ctx.save(); ctx.translate((i - 1) * adv, 0);
+        if (i === 0 && st.oneTip) { ctx.translate(-adv * 0.3, 100); ctx.rotate(-st.oneTip); ctx.translate(adv * 0.3, -100 + st.oneTip * st.oneTip * 900); }
+        ctx.fillText(d, 0, 0); ctx.restore();
+      });
+    } else ctx.fillText(String(Math.round(st.score)), 0, 0);
     ctx.restore();
     label(ctx, '/ 100', x, y + 150, { t, t0: 0, size: 30, col: C.paper2, align: 'center', alpha: st.scoreAlpha * 0.8 });
   }
@@ -51,7 +60,9 @@ function indexUI(ctx, st) {
     const by = BARS.y0 + i * BARS.dy;
     ctx.save(); ctx.globalAlpha *= clamp(inn * 1.5);
     ctx.font = `600 40px ${SERIF}`; ctx.fillStyle = C.paper; ctx.textBaseline = 'middle'; ctx.textAlign = 'right';
-    ctx.fillText(p, BARS.x - 36, by + (1 - inn) * 20);
+    ctx.fillText(p, BARS.x - 36, by - 8 + (1 - inn) * 20);
+    ctx.font = `400 17px ${MONO}`; ctx.fillStyle = C.paper2; ctx.letterSpacing = '1px';
+    ctx.fillText(PARAMS_EN[i], BARS.x - 36, by + 30 + (1 - inn) * 20);
     ctx.restore();
     const len = (BARS.x1 - BARS.x) * st.bars[i] * inn;
     line(ctx, [[BARS.x, by], [BARS.x1, by]], { w: 2, col: C.paper, alpha: 0.15 * inn });
@@ -62,14 +73,15 @@ function indexUI(ctx, st) {
 
   // student prompt line
   if (st.prompt) {
-    label(ctx, '›', 120, 960, { t, t0: st.promptT0 - 0.3, size: 48, col: C.red });
+    label(ctx, '›', 120, 860, { t, t0: st.promptT0 - 0.3, size: 48, col: C.red });
     const n = Math.floor(clamp((t - st.promptT0) * 9, 0, [...st.prompt].length));
     ctx.save(); ctx.font = `900 64px ${SERIF}`; ctx.fillStyle = C.paper; ctx.textBaseline = 'middle';
     const s = [...st.prompt].slice(0, n).join('');
-    ctx.fillText(s, 170, 962);
+    ctx.fillText(s, 170, 862);
     const cw = ctx.measureText(s).width;
-    if (Math.floor(t * 2.4) % 2 === 0) ctx.fillRect(176 + cw, 930, 4, 64);
+    if (Math.floor(t * 2.4) % 2 === 0) ctx.fillRect(176 + cw, 830, 4, 64);
     ctx.restore();
+    if (st.promptEn) en(ctx, st.promptEn, 172, 922, { t, t0: st.promptT0 + 0.5, size: 28 });
   }
 }
 
@@ -85,7 +97,7 @@ function s01State(t) {
     pop: t > land ? Math.exp(-(t - land) * 5) * Math.cos((t - land) * 14) : 0,
     barsIn: PARAMS.map((_, i) => spring(t, 3.5 + i * 0.16, { freq: 2, damp: 0.55 })),
     bars: [0.94, 0.9, 0.97, 0.88, 0.99].map((v, i) => v * clamp(spring(t, 3.6 + i * 0.16, { freq: 1.6, damp: 0.5 }), 0, 1.2)),
-    prompt: t > 9.9 ? '为什么？' : null, promptT0: 10.2,
+    prompt: t > 9.9 ? '为什么？' : null, promptEn: 'Why?', promptT0: 10.2,
   };
 }
 

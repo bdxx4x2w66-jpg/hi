@@ -131,6 +131,7 @@ function text(ctx, str, x, y, {
   t = 99, t0 = 0, stagger = 0.045, out = null, spacing = 0, alpha = 1, rise = 0.35,
 } = {}) {
   ctx.save();
+  const base0 = ctx.globalAlpha;
   ctx.font = `${weight} ${size}px ${font}`;
   ctx.textBaseline = base; ctx.fillStyle = col;
   const chars = [...str];
@@ -142,7 +143,7 @@ function text(ctx, str, x, y, {
     let a = clamp(s * 1.4) * alpha;
     if (out) a *= 1 - tw(t, out + i * stagger * 0.5, out + 0.35 + i * stagger * 0.5, E.inCubic);
     if (a > 0.001) {
-      ctx.globalAlpha = a;
+      ctx.globalAlpha = base0 * a;
       ctx.fillText(ch, cx, y + (1 - s) * size * rise);
     }
     cx += widths[i];
@@ -372,4 +373,37 @@ function aiBox(ctx, x, y, w, h, t, t0, { labelTxt = '', col = C.red, dashOff = 0
     ctx.fillText(labelTxt, cx - ww / 2 + 14, cy - hh / 2 - labelSize * 1.1);
     ctx.restore();
   }
+}
+
+// English companion line (Latin glyphs of the serif), fades and rises in.
+function en(ctx, str, x, y, { t = 99, t0 = 0, size = 26, col = C.paper2, align = 'left', alpha = 1, out = null, weight = 600, spacing = 1.5, font = SERIF } = {}) {
+  let a = clamp((t - t0) / 0.5) * alpha;
+  if (out != null) a *= 1 - tw(t, out, out + 0.4);
+  if (a <= 0.001) return;
+  const k = E.outCubic(clamp((t - t0) / 0.6));
+  ctx.save(); ctx.globalAlpha *= a;
+  ctx.font = `${weight} ${size}px ${font}`; ctx.fillStyle = col; ctx.textAlign = align; ctx.textBaseline = 'middle';
+  ctx.letterSpacing = `${spacing}px`;
+  ctx.fillText(str, x, y + (1 - k) * size * 0.5);
+  ctx.restore();
+}
+
+// Bilingual dialogue subtitles for every voiced cue (unless the line is already big on screen).
+function subtitles(ctx, T, cues) {
+  cues.forEach((c, i) => {
+    if (c.sub === false) return;
+    const nxt = cues.slice(i + 1).find(n => n.sub !== false);
+    const end = Math.min(c.abs + c.dur + 0.7, nxt ? nxt.abs - 0.05 : 1e9);
+    if (T < c.abs - 0.05 || T > end) return;
+    const a = clamp((T - c.abs + 0.05) / 0.15) * clamp((end - T) / 0.2);
+    ctx.save(); ctx.globalAlpha = a; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.shadowColor = 'rgba(0,0,0,0.85)'; ctx.shadowBlur = 14;
+    ctx.font = `600 40px ${SERIF}`;
+    const zh = c.text, zw = ctx.measureText(zh).width;
+    ctx.fillStyle = C.paper; ctx.fillText(zh, W / 2, 962);
+    if (c.who === 'ai') { ctx.shadowBlur = 0; dot(ctx, W / 2 - zw / 2 - 26, 962, 7, C.red); ctx.shadowBlur = 14; }
+    ctx.font = `600 25px ${SERIF}`; ctx.letterSpacing = '1px'; ctx.fillStyle = C.paper2;
+    ctx.fillText(c.en, W / 2, 1012);
+    ctx.restore();
+  });
 }

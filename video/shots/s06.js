@@ -286,13 +286,14 @@ SHOTS.s06 = (ctx, t) => {
   withCam(ctx, cam, () => {
     if (t < breakT) {
       const jitter = t > 15.2 ? (rnd(Math.floor(t * 30), 3) - 0.5) * 10 : 0;
-      aiBox(ctx, boxR.x + jitter, boxR.y, boxR.w, boxR.h, t, 10.5, { labelTxt: '剩余粮食 ≈ 3 日', dashOff: t * 30, labelSize: 30 });
+      aiBox(ctx, boxR.x + jitter, boxR.y, boxR.w, boxR.h, t, 10.5, { labelTxt: '剩余粮食 ≈ 3 日  ·  FOOD LEFT ≈ 3 DAYS', dashOff: t * 30, labelSize: 26 });
       if (t > 11.9) {
         const k = spring(t, 12, { freq: 2, damp: 0.6 });
         ctx.save(); ctx.globalAlpha = clamp(k * 2);
         ctx.fillStyle = C.red; ctx.font = `900 64px ${SERIF}`; ctx.textBaseline = 'top';
-        ctx.fillText('最优策略：保留', boxR.x, boxR.y - 170 + (1 - k) * 30);
+        ctx.fillText('最优策略：保留', boxR.x, boxR.y - 190 + (1 - k) * 30);
         ctx.restore();
+        en(ctx, 'OPTIMAL STRATEGY: KEEP IT', boxR.x + 2, boxR.y - 84, { t, t0: 12.3, size: 24, col: C.red, font: MONO, weight: 700, spacing: 2 });
       }
     }
   });

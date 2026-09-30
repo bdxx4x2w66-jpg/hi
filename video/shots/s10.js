@@ -58,7 +58,7 @@ function roadWorld(ctx, t) {
 
   // V1 · turns back to help a classmate carry the stack of papers
   ctx.save(); ctx.strokeStyle = C.paper; ctx.globalAlpha = 0.5; ctx.lineWidth = 3; ctx.strokeRect(V1 - 300, gy - 250, 130, 250); ctx.restore();
-  label(ctx, '教室', V1 - 290, gy - 272, { t, t0: 0, size: 22, col: C.paper2 });
+  label(ctx, '教室 CLASSROOM', V1 - 300, gy - 272, { t, t0: 0, size: 22, col: C.paper2 });
   const a1 = tw(t, 9.4, 10.6, E.inOutSine), back1 = tw(t, 10.9, 11.9, E.inOutCubic);
   const ax = V1 - 60 + a1 * 150 - back1 * 170;
   const facing1 = t < 10.8 ? 1 : -1;
@@ -108,6 +108,7 @@ SHOTS.s10 = (ctx, t) => {
     if (t < 2.6) arc(c, 960, 540, 46, t * 2.2, t * 2.2 + 0.9 + spin * 0.4, { w: 4, col: C.paper, alpha: 0.8 * (1 - tw(t, 2.2, 2.6)) });
     label(c, 'RESULT', 180, 400, { t, t0: 2.5, size: 30, col: C.paper2 });
     text(c, '无法评分', 170, 540, { size: 200, align: 'left', t, t0: 2.6, stagger: 0.12 });
+    en(c, 'UNABLE TO SCORE', 178, 700, { t, t0: 3.2, size: 48, col: C.red, font: MONO, weight: 700, spacing: 6 });
     const d = spring(t, 3.4, { freq: 2.2, damp: 0.45 });
     if (d > 0) dot(c, 170 + 4 * 200 + 50, 600, 18 * d, C.red);
   };
@@ -146,8 +147,11 @@ SHOTS.s10 = (ctx, t) => {
   // closing words, upper left over the sky (never centred)
   text(ctx, '苦难只是问题，', 140, 190, { size: 76, align: 'left', t, t0: 11.6, stagger: 0.07, out: 16.4 });
   text(ctx, '人怎样回答，才构成精神。', 140, 300, { size: 76, align: 'left', t, t0: 12.4, stagger: 0.07, out: 16.5 });
+  en(ctx, 'Hardship is only the question. How we answer it — that is the spirit.', 144, 385, { t, t0: 13.4, size: 30, out: 16.5 });
   text(ctx, '有些东西无法评分', 140, 230, { size: 104, align: 'left', t, t0: 17.0, stagger: 0.09 });
-  text(ctx, '满分', 146, 360, { size: 52, weight: 600, col: C.red, align: 'left', t, t0: 17.9, stagger: 0.12, spacing: 18 });
+  en(ctx, 'Some things cannot be scored.', 146, 325, { t, t0: 17.7, size: 36 });
+  text(ctx, '满分', 146, 430, { size: 52, weight: 600, col: C.red, align: 'left', t, t0: 18.0, stagger: 0.12, spacing: 18 });
+  en(ctx, 'FULL MARKS', 300, 432, { t, t0: 18.3, size: 26, col: C.red, font: MONO, weight: 700, spacing: 6 });
 
   // foreground: roadside grass and a lamp post sliding past faster than the road (depth)
   ctx.save(); ctx.globalAlpha = tw(t, 8.8, 10);
@@ -157,8 +161,8 @@ SHOTS.s10 = (ctx, t) => {
     line(ctx, [[x, H + 10], [x + (rnd(i, 62) - 0.5) * 40, H - h]], { w: 5, col: '#08090A' });
   }
   const lp = ((1500 + fx) % 3200 + 3200) % 3200 - 400;
-  line(ctx, [[lp, H + 20], [lp, 330], [lp + 70, 310]], { w: 16, col: '#08090A' });
-  ctx.fillStyle = '#08090A'; ctx.fillRect(lp + 50, 304, 60, 18);
+  line(ctx, [[lp, H + 20], [lp, 520], [lp + 70, 500]], { w: 16, col: '#08090A' });
+  ctx.fillStyle = '#08090A'; ctx.fillRect(lp + 50, 494, 60, 18);
   ctx.restore();
 
   vignette(ctx, 0.45);

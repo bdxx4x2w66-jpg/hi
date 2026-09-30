@@ -58,7 +58,14 @@ def main():
                 end = off + d
                 got += txt
                 k += 1
-            result.append(dict(c, start=round(first, 3), dur=round(end - first, 3)))
+            # trim to the audible speech inside the boundary span
+            seg = x[int(first * SR):int(end * SR) + int(0.05 * SR)]
+            env = np.convolve(np.abs(seg), np.ones(480) / 480, mode="same")
+            on = np.where(env > 10 ** (-42 / 20))[0]
+            a, b = (on[0], on[-1]) if len(on) else (0, len(seg))
+            a = max(0, a - int(0.03 * SR)); b = min(len(seg), b + int(0.08 * SR))
+            wavfile.write(os.path.join(OUT, f"{c['shot']}_{c['idx']}.wav"), SR, (seg[a:b] * 32767).astype(np.int16))
+            result.append(dict(c, start=round(first + a / SR, 3), dur=round((b - a) / SR, 3)))
         print(who, "take", round(len(x) / SR, 2), "s,", len(mine), "cues")
     json.dump(result, open(os.path.join(OUT, "cues.json"), "w"), ensure_ascii=False, indent=1)
 

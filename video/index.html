@@ -29,6 +29,7 @@
   let acc = 0;
   const TIMELINE = STORY.shots.map(s => { const o = { ...s, start: acc }; acc += s.dur; return o; });
   const TOTAL = acc;
+  const CUES = TIMELINE.flatMap(s => s.cues.map(c => ({ ...c, abs: s.start + c.at, shot: s.id })));
   const ctx = document.getElementById('c').getContext('2d');
 
   // Draw frame at absolute time t (seconds). Pure: output depends only on t.
@@ -42,6 +43,8 @@
     bg(ctx);
     if (fn) fn(ctx, t - shot.start, shot, t);
     else text(ctx, shot.id + ' ' + shot.name, W / 2, H / 2, { size: 80 });
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
+    subtitles(ctx, t, CUES);
     grain(ctx, t, 0.035);
   };
   window.TOTAL = TOTAL;

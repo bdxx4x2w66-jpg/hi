@@ -1,75 +1,358 @@
 {
-  "title": "满分",
-  "fps": 30,
-  "width": 1920,
-  "height": 1080,
-  "bpm": 96,
-  "voices": {
-    "ai": { "voice": "zh-CN-XiaoxiaoNeural", "rate": "-8%", "pitch": "-4Hz" },
-    "me": { "voice": "zh-CN-YunxiNeural", "rate": "-6%", "pitch": "+0Hz" }
+ "title": "满分",
+ "title_en": "Full Marks",
+ "fps": 30,
+ "width": 1920,
+ "height": 1080,
+ "bpm": 96,
+ "voices": {
+  "ai": {
+   "voice": "zh-CN-XiaoxiaoNeural",
+   "rate": "-2%",
+   "pitch": "-4Hz"
   },
-  "shots": [
-    { "id": "s01", "name": "100分", "dur": 12.5, "cues": [
-      { "who": "ai", "at": 5.4, "text": "分析完成。长征精神指数，一百分。" },
-      { "who": "me", "at": 10.2, "text": "为什么？" }
-    ]},
-    { "id": "s02", "name": "越苦分越高", "dur": 20, "cues": [
-      { "who": "ai", "at": 0.6, "text": "高强度饥饿、疲劳、危险、长距离行进，以及持续坚持。" },
-      { "who": "me", "at": 5.6, "text": "所以，只要我故意让自己挨饿、淋雨、走很远，我也能一百分？" },
-      { "who": "ai", "at": 11.2, "text": "按照当前模型，是。" },
-      { "who": "me", "at": 13.4, "text": "那你算错了。" }
-    ]},
-    { "id": "s03", "name": "98=98", "dur": 20, "cues": [
-      { "who": "me", "at": 0.5, "text": "那我给你两个人。" },
-      { "who": "ai", "at": 12.2, "text": "两者经历的客观困难，基本一致。" },
-      { "who": "me", "at": 15.2, "text": "一样？" },
-      { "who": "me", "at": 16.6, "text": "我问的是，他们真的一样吗？" }
-    ]},
-    { "id": "s04", "name": "加一项", "dur": 15, "cues": [
-      { "who": "me", "at": 0.4, "text": "加一项。" },
-      { "who": "ai", "at": 2.6, "text": "变量定义不明确。" },
-      { "who": "ai", "at": 4.9, "text": "无法量化。" },
-      { "who": "me", "at": 6.6, "text": "那你能算什么？" },
-      { "who": "ai", "at": 10.2, "text": "新增指标：坚持。" },
-      { "who": "me", "at": 13.1, "text": "坚持？" }
-    ]},
-    { "id": "s05", "name": "错误的方向", "dur": 20, "cues": [
-      { "who": "me", "at": 1.0, "text": "一个人发现方向走错了，但他特别能坚持。" },
-      { "who": "me", "at": 6.4, "text": "如果他越走越远呢？如果永远不改呢？" },
-      { "who": "me", "at": 11.0, "text": "错误的方向，坚持得越久，反而越伟大？" },
-      { "who": "ai", "at": 16.2, "text": "逻辑冲突。" }
-    ]},
-    { "id": "s06", "name": "一袋米", "dur": 20, "cues": [
-      { "who": "me", "at": 0.6, "text": "别算模拟题了，看看真的。" },
-      { "who": "ai", "at": 10.2, "text": "剩余粮食，约三日。最优策略：保留。" }
-    ]},
-    { "id": "s07", "name": "竹篱", "dur": 20, "cues": [
-      { "who": "ai", "at": 0.5, "text": "行为不符合利益最大化预测。" },
-      { "who": "me", "at": 3.4, "text": "所以，做错了吗？" },
-      { "who": "ai", "at": 6.4, "text": "夜间照明。推荐：拆除最近的竹篱，获取成本最低。" },
-      { "who": "me", "at": 17.0, "text": "又算错了。" }
-    ]},
-    { "id": "s08", "name": "连续追问", "dur": 20, "cues": [
-      { "who": "me", "at": 0.3, "text": "他们饿吗？" },
-      { "who": "ai", "at": 1.5, "text": "是。" },
-      { "who": "me", "at": 2.2, "text": "前面缺粮吗？" },
-      { "who": "ai", "at": 3.6, "text": "是。" },
-      { "who": "me", "at": 4.3, "text": "拆篱笆是不是更快？" },
-      { "who": "ai", "at": 6.1, "text": "是。" },
-      { "who": "me", "at": 7.0, "text": "那为什么把米留下？" },
-      { "who": "me", "at": 9.7, "text": "为什么不拆？" },
-      { "who": "me", "at": 12.2, "text": "如果没人知道呢？" },
-      { "who": "me", "at": 15.2, "text": "所以你能算他们受了多少苦，却算不出，他们为什么这样做。" }
-    ]},
-    { "id": "s09", "name": "选择=", "dur": 17.5, "cues": [
-      { "who": "ai", "at": 0.6, "text": "是否重新建立评分模型？" },
-      { "who": "ai", "at": 12.2, "text": "你放弃建立模型？" },
-      { "who": "me", "at": 14.0, "text": "不是。" },
-      { "who": "me", "at": 15.2, "text": "是我不该把它变成公式。" }
-    ]},
-    { "id": "s10", "name": "真正的满分", "dur": 20, "cues": [
-      { "who": "ai", "at": 2.6, "text": "无法评分。" },
-      { "who": "me", "at": 5.0, "text": "这次你算对了。" }
-    ]}
-  ]
+  "me": {
+   "voice": "zh-CN-YunxiNeural",
+   "rate": "+0%",
+   "pitch": "+0Hz"
+  }
+ },
+ "shots": [
+  {
+   "id": "s01",
+   "name": "100分",
+   "dur": 12.5,
+   "cues": [
+    {
+     "who": "ai",
+     "at": 5.4,
+     "text": "分析完成。长征精神指数，一百分。",
+     "en": "Analysis complete. Long March Spirit Index: 100."
+    },
+    {
+     "who": "me",
+     "at": 10.2,
+     "text": "为什么？",
+     "en": "Why?",
+     "sub": false
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "name": "越苦分越高",
+   "dur": 20,
+   "cues": [
+    {
+     "who": "ai",
+     "at": 0.4,
+     "text": "饥饿、疲劳、危险、长距离行进，以及坚持。",
+     "en": "Hunger, fatigue, danger, long marches — and persistence."
+    },
+    {
+     "who": "me",
+     "at": 5.4,
+     "text": "所以只要我故意挨饿、淋雨、走很远，也能一百分？",
+     "en": "So if I starve myself, stand in the rain and walk far, I get 100 too?"
+    },
+    {
+     "who": "ai",
+     "at": 11.3,
+     "text": "按照当前模型，是。",
+     "en": "Under the current model, yes."
+    },
+    {
+     "who": "me",
+     "at": 13.9,
+     "text": "那你算错了。",
+     "en": "Then you got it wrong."
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "name": "98=98",
+   "dur": 20,
+   "cues": [
+    {
+     "who": "me",
+     "at": 0.5,
+     "text": "那我给你两个人。",
+     "en": "Then here are two people."
+    },
+    {
+     "who": "ai",
+     "at": 12.0,
+     "text": "两者经历的客观困难，基本一致。",
+     "en": "Both faced essentially the same objective hardship."
+    },
+    {
+     "who": "me",
+     "at": 15.0,
+     "text": "一样？",
+     "en": "The same?"
+    },
+    {
+     "who": "me",
+     "at": 16.4,
+     "text": "我问的是，他们真的一样吗？",
+     "en": "I'm asking — are they really the same?"
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "name": "加一项",
+   "dur": 15,
+   "cues": [
+    {
+     "who": "me",
+     "at": 0.4,
+     "text": "加一项。",
+     "en": "Add a variable."
+    },
+    {
+     "who": "ai",
+     "at": 2.6,
+     "text": "变量定义不明确。",
+     "en": "Variable not defined."
+    },
+    {
+     "who": "ai",
+     "at": 4.8,
+     "text": "无法量化。",
+     "en": "Cannot be quantified."
+    },
+    {
+     "who": "me",
+     "at": 6.6,
+     "text": "那你能算什么？",
+     "en": "Then what can you calculate?"
+    },
+    {
+     "who": "ai",
+     "at": 10.2,
+     "text": "新增指标：坚持。",
+     "en": "New metric: persistence."
+    },
+    {
+     "who": "me",
+     "at": 13.1,
+     "text": "坚持？",
+     "en": "Persistence?"
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "name": "错误的方向",
+   "dur": 20,
+   "cues": [
+    {
+     "who": "me",
+     "at": 1.0,
+     "text": "一个人发现方向走错了，但他特别能坚持。",
+     "en": "Someone finds he's going the wrong way — but he's very persistent."
+    },
+    {
+     "who": "me",
+     "at": 6.2,
+     "text": "如果他越走越远呢？如果永远不改呢？",
+     "en": "What if he goes further? What if he never turns back?"
+    },
+    {
+     "who": "me",
+     "at": 11.0,
+     "text": "错误的方向，坚持得越久，反而越伟大？",
+     "en": "The wrong direction — and the longer you persist, the greater you are?",
+     "sub": false
+    },
+    {
+     "who": "ai",
+     "at": 16.2,
+     "text": "逻辑冲突。",
+     "en": "Logic conflict.",
+     "sub": false
+    }
+   ]
+  },
+  {
+   "id": "s06",
+   "name": "一袋米",
+   "dur": 20,
+   "cues": [
+    {
+     "who": "me",
+     "at": 0.6,
+     "text": "别算模拟题了，看看真的。",
+     "en": "Enough simulations. Look at what really happened."
+    },
+    {
+     "who": "ai",
+     "at": 10.2,
+     "text": "剩余粮食，约三日。最优策略：保留。",
+     "en": "Food left: about three days. Optimal strategy: keep it."
+    }
+   ]
+  },
+  {
+   "id": "s07",
+   "name": "竹篱",
+   "dur": 20,
+   "cues": [
+    {
+     "who": "ai",
+     "at": 0.5,
+     "text": "行为不符合利益最大化预测。",
+     "en": "Behaviour does not match the utility-maximising prediction."
+    },
+    {
+     "who": "me",
+     "at": 3.6,
+     "text": "所以，做错了吗？",
+     "en": "So — was it a mistake?"
+    },
+    {
+     "who": "ai",
+     "at": 6.6,
+     "text": "夜间照明。推荐：拆除最近的竹篱，成本最低。",
+     "en": "Night lighting needed. Recommended: take down the nearest fence. Lowest cost."
+    },
+    {
+     "who": "me",
+     "at": 17.2,
+     "text": "又算错了。",
+     "en": "Wrong again."
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "name": "连续追问",
+   "dur": 20,
+   "cues": [
+    {
+     "who": "me",
+     "at": 0.3,
+     "text": "他们饿吗？",
+     "en": "Were they hungry?",
+     "sub": false
+    },
+    {
+     "who": "ai",
+     "at": 1.6,
+     "text": "是。",
+     "en": "Yes.",
+     "sub": false
+    },
+    {
+     "who": "me",
+     "at": 2.3,
+     "text": "前面缺粮吗？",
+     "en": "Was food short ahead?",
+     "sub": false
+    },
+    {
+     "who": "ai",
+     "at": 3.8,
+     "text": "是。",
+     "en": "Yes.",
+     "sub": false
+    },
+    {
+     "who": "me",
+     "at": 4.5,
+     "text": "拆篱笆是不是更快？",
+     "en": "Would taking the fence be faster?",
+     "sub": false
+    },
+    {
+     "who": "ai",
+     "at": 6.5,
+     "text": "是。",
+     "en": "Yes.",
+     "sub": false
+    },
+    {
+     "who": "me",
+     "at": 7.3,
+     "text": "那为什么把米留下？",
+     "en": "Then why leave the rice behind?",
+     "sub": false
+    },
+    {
+     "who": "me",
+     "at": 10.0,
+     "text": "为什么不拆？",
+     "en": "Why not take the fence?",
+     "sub": false
+    },
+    {
+     "who": "me",
+     "at": 12.2,
+     "text": "如果没人知道呢？",
+     "en": "What if no one would ever know?",
+     "sub": false
+    },
+    {
+     "who": "me",
+     "at": 14.6,
+     "text": "所以你能算他们受了多少苦，却算不出，他们为什么这样做。",
+     "en": "So you can calculate how much they suffered — but not why they did it.",
+     "sub": false
+    }
+   ]
+  },
+  {
+   "id": "s09",
+   "name": "选择=",
+   "dur": 17.5,
+   "cues": [
+    {
+     "who": "ai",
+     "at": 2.6,
+     "text": "是否重新建立评分模型？",
+     "en": "Rebuild the scoring model?"
+    },
+    {
+     "who": "ai",
+     "at": 11.9,
+     "text": "你放弃建立模型？",
+     "en": "You're giving up on the model?"
+    },
+    {
+     "who": "me",
+     "at": 13.8,
+     "text": "不是。",
+     "en": "No."
+    },
+    {
+     "who": "me",
+     "at": 14.9,
+     "text": "是我不该把它变成公式。",
+     "en": "I just shouldn't turn it into a formula."
+    }
+   ]
+  },
+  {
+   "id": "s10",
+   "name": "真正的满分",
+   "dur": 20,
+   "cues": [
+    {
+     "who": "ai",
+     "at": 2.6,
+     "text": "无法评分。",
+     "en": "Unable to score.",
+     "sub": false
+    },
+    {
+     "who": "me",
+     "at": 5.0,
+     "text": "这次你算对了。",
+     "en": "This time, you got it right."
+    }
+   ]
+  }
+ ]
 }
