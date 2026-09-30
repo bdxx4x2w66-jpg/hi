@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>满分</title>
+<link rel="stylesheet" href="../build/fonts/fonts.css">
+<style>
+  html, body { margin: 0; background: #0F1114; }
+  canvas { display: block; width: 100vw; height: auto; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script src="../build/story.js"></script>
+<script src="lib.js"></script>
+<script>const SHOTS = {};</script>
+<script src="shots/s01.js"></script>
+<script src="shots/s02.js"></script>
+<script src="shots/s03.js"></script>
+<script src="shots/s04.js"></script>
+<script src="shots/s05.js"></script>
+<script src="shots/s06.js"></script>
+<script src="shots/s07.js"></script>
+<script src="shots/s08.js"></script>
+<script src="shots/s09.js"></script>
+<script src="shots/s10.js"></script>
+<script>
+  // Absolute shot start times, derived from story.json durations.
+  let acc = 0;
+  const TIMELINE = STORY.shots.map(s => { const o = { ...s, start: acc }; acc += s.dur; return o; });
+  const TOTAL = acc;
+  const ctx = document.getElementById('c').getContext('2d');
+
+  // Draw frame at absolute time t (seconds). Pure: output depends only on t.
+  window.render = function (t) {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.globalAlpha = 1;
+    let i = TIMELINE.length - 1;
+    while (i > 0 && t < TIMELINE[i].start) i--;
+    const shot = TIMELINE[i];
+    const fn = SHOTS[shot.id];
+    bg(ctx);
+    if (fn) fn(ctx, t - shot.start, shot, t);
+    else text(ctx, shot.id + ' ' + shot.name, W / 2, H / 2, { size: 80 });
+    grain(ctx, t, 0.035);
+  };
+  window.TOTAL = TOTAL;
+  window.ready = document.fonts.ready.then(() =>
+    Promise.all(['900 40px "Noto Serif SC"', '600 40px "Noto Serif SC"', '400 20px "JetBrains Mono"', '700 20px "JetBrains Mono"']
+      .map(f => document.fonts.load(f, '满分0'))));
+</script>
+</body>
+</html>
